@@ -1,6 +1,6 @@
 <?php
-require 'protege.php';
-require 'db.php';
+require '../protege.php';
+require '../db.php';
 
 $nome = trim($_POST['nome'] ?? '');
 if ($nome === '') {

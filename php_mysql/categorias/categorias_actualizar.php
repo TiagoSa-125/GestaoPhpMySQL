@@ -2,7 +2,7 @@
 require '../protege.php';
 require '../db.php';
 
-$id   = (int) ($_POST['id'] ?? 0);
+$id = (int) ($_POST['id'] ?? 0);
 $nome = trim($_POST['nome'] ?? '');
 
 if ($id > 0 && $nome !== '') {
