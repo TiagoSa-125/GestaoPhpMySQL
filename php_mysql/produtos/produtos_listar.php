@@ -1,7 +1,7 @@
 <?php
 require '../protege.php';
 require '../db.php';
-$pagina_ativa = 'produtos';
+$pagina_ativa = 'produtos'  ;
 
 // JOIN entre produtos e categorias, para mostrar o NOME da categoria
 // em vez de apenas o categoria_id

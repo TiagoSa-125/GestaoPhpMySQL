@@ -9,23 +9,26 @@ $id = (int) ($_GET['id'] ?? 0);
 $stmt = mysqli_prepare($ligacao, "SELECT * FROM produtos WHERE id = ?");
 mysqli_stmt_bind_param($stmt, 'i', $id);
 mysqli_stmt_execute($stmt);
-$categoria = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+$produto = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
 
 if (!$produto) { header('Location: produtos_listar.php'); exit; }
 
 ?>
 <h1>Editar produto</h1>
-<form method="post" action="produtos_inserir.php">
+<form method="post" action="produtos_actualizar.php">
+    <input type="hidden" name="id" value="<?php echo $produto['id'];?>">
+
     <label>Nome</label>
-    <input type="text" name="nome" required>
+    <input type="text" name="nome" required value="<?php echo $produto['nome'];?>">
 
     <label>Preço (€)</label>
-    <input type="number" step="0.01" min="0" name="preco" required>
+    <input type="number" step="0.01" min="0" name="preco" required value="<?php echo $produto['preco'];?>">
 
     <label>Categoria</label>
     <select name="categoria_id">
         <option value="">-- sem categoria --</option>
-        <?php while ($c = mysqli_fetch_assoc($categorias)): ?>
+        <?php 
+        while ($c = mysqli_fetch_assoc($categorias)): 
             $sel = '';
             if($c['id'] == $produto['categoria_id']) $sel = "selected='selected'";
         ?>
@@ -33,7 +36,7 @@ if (!$produto) { header('Location: produtos_listar.php'); exit; }
                 <?php echo htmlspecialchars($c['nome']); ?>
             </option>
         <?php endwhile; ?>
-    </select>
+    </select>   
 
     <button type="submit">Guardar</button>
 </form>
