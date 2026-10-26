@@ -9,7 +9,6 @@ if ($utilizador === '' || $password === '') {
     header('Location: login.php?erro=1');
     exit;
 }
-
 $consulta = "SELECT * FROM administradores WHERE utilizador = ?";
 $stmt = mysqli_prepare($ligacao, $consulta);
 mysqli_stmt_bind_param($stmt, 's', $utilizador);
